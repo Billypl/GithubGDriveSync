@@ -1,0 +1,36 @@
+name: Update Google Drive
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install google-api-python-client google-auth google-auth-oauthlib google-auth-httplib2
+
+      - name: Restore credentials.json
+        run: |
+          echo "${{ secrets.GDRIVE_CREDENTIALS_B64 }}" | base64 -d > credentials.json
+
+      - name: Restore token_drive_v3.pickle
+        run: |
+          echo "${{ secrets.GDRIVE_TOKEN_B64 }}" | base64 -d > token_drive_v3.pickle
+
+      - name: Usuń pliki .gitkeep
+        run: find . -name ".gitkeep" -delete
+
+      - name: Upload to Google Drive  
+        run: python .github/workflows/update_drive.py
+        working-directory: ${{ github.workspace }}
