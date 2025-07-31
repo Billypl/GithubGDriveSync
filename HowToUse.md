@@ -1,4 +1,4 @@
-# How to contribute?
+# How to 
 
 ## Tutorial - mixed CLI and GitHub page
 Quick forking tutorial for newbies: https://www.youtube.com/watch?v=CML6vfKjQss
@@ -11,8 +11,8 @@ sudo apt install gh
 gh auth login
 
 # fork the repo
-gh repo fork Billypl/PaczkownicyInfaPG --clone
-cd PaczkownicyInfaPG/paczka
+gh repo fork REPO_OWNER_USERNAME/REPO_NAME --clone
+cd REPO_NAME/shared
 git checkout -b YOUR_BRANCH_NAME
 
 # add your files here
